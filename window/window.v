@@ -72,46 +72,46 @@ pub fn (mut this ConfigFlags) parse(value int) ConfigFlags {
 pub fn (this ConfigFlags) value() int {
 	mut res := 0
 
-	if this == ConfigFlags.vsync_hint {
+	if this.has(.vsync_hint) {
 		res |= C.FLAG_VSYNC_HINT
 	}
-	if this == ConfigFlags.fullscreen_mode {
+	if this.has(.fullscreen_mode) {
 		res |= C.FLAG_FULLSCREEN_MODE
 	}
-	if this == ConfigFlags.window_resizable {
+	if this.has(.window_resizable) {
 		res |= C.FLAG_WINDOW_RESIZABLE
 	}
-	if this == ConfigFlags.window_undecorated {
+	if this.has(.window_undecorated) {
 		res |= C.FLAG_WINDOW_UNDECORATED
 	}
-	if this == ConfigFlags.window_hidden {
+	if this.has(.window_hidden) {
 		res |= C.FLAG_WINDOW_HIDDEN
 	}
-	if this == ConfigFlags.window_minimized {
+	if this.has(.window_minimized) {
 		res |= C.FLAG_WINDOW_MINIMIZED
 	}
-	if this == ConfigFlags.window_maximized {
+	if this.has(.window_maximized) {
 		res |= C.FLAG_WINDOW_MAXIMIZED
 	}
-	if this == ConfigFlags.window_unfocused {
+	if this.has(.window_unfocused) {
 		res |= C.FLAG_WINDOW_UNFOCUSED
 	}
-	if this == ConfigFlags.window_topmost {
+	if this.has(.window_topmost) {
 		res |= C.FLAG_WINDOW_TOPMOST
 	}
-	if this == ConfigFlags.window_always_run {
+	if this.has(.window_always_run) {
 		res |= C.FLAG_WINDOW_ALWAYS_RUN
 	}
-	if this == ConfigFlags.window_transparent {
+	if this.has(.window_transparent) {
 		res |= C.FLAG_WINDOW_TRANSPARENT
 	}
-	if this == ConfigFlags.window_highdpi {
+	if this.has(.window_highdpi) {
 		res |= C.FLAG_WINDOW_HIGHDPI
 	}
-	if this == ConfigFlags.msaa_4x_hint {
+	if this.has(.msaa_4x_hint) {
 		res |= C.FLAG_MSAA_4X_HINT
 	}
-	if this == ConfigFlags.interlaced_hint {
+	if this.has(.interlaced_hint) {
 		res |= C.FLAG_INTERLACED_HINT
 	}
 	return res
