@@ -117,6 +117,15 @@ pub fn (this ConfigFlags) value() int {
 	return res
 }
 
+fn C.SetConfigFlags(flags u32)
+pub fn set_config_flag(flag ConfigFlags) {
+	C.SetConfigFlags(flag.value())
+}
+
+pub fn (this ConfigFlags) configure() {
+	C.SetConfigFlags(this.value())
+}
+
 fn C.InitWindow(width int, height int, title &char)
 pub fn init(width int, height int, title string) {
 	unsafe {
@@ -279,5 +288,5 @@ pub fn get_position() (int, int) {
 fn C.GetWindowScaleDPI() rl.Vector2
 pub fn get_scale_dpi() (int, int) {
 	sdpi := C.GetWindowScaleDPI()
-	return sdpi.x, sdpi.y 
+	return sdpi.x, sdpi.y
 }

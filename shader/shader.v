@@ -11,6 +11,25 @@ pub struct C.Shader {
 
 pub type Shader = C.Shader
 
+pub enum ShaderUniformDataType {
+	float = C.SHADER_UNIFORM_FLOAT
+	vec2 = C.SHADER_UNIFORM_VEC2
+	vec3 = C.SHADER_UNIFORM_VEC3
+	vec4 = C.SHADER_UNIFORM_VEC4
+	integer = C.SHADER_UNIFORM_INT
+	ivec2 = C.SHADER_UNIFORM_IVEC2
+	ivec3 = C.SHADER_UNIFORM_IVEC3
+	ivec4 = C.SHADER_UNIFORM_IVEC4
+	sampler2d = C.SHADER_UNIFORM_SAMPLER2D
+}
+
+pub enum ShaderAttributeDataType {
+	float = C.SHADER_ATTRIB_FLOAT
+	vec2 = C.SHADER_ATTRIB_VEC2
+	vec3 = C.SHADER_ATTRIB_VEC3
+	vec4 = C.SHADER_ATTRIB_VEC4
+}
+
 pub enum ShaderLocationIndex {
 	vertex_position = C.SHADER_LOC_VERTEX_POSITION
 	vertex_texcoord01 = C.SHADER_LOC_VERTEX_TEXCOORD01
