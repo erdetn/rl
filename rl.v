@@ -4,11 +4,22 @@ module rl
 
 import rl.color
 import rl.geometry
-import rl.camera
 import rl.image
 import rl.vr
 
-const version = C.RAYLIB_VERSION
+#flag -I .
+#flag -I /usr/include
+#flag -l raylib 
+#flag -l GL 
+#flag -l m 
+#flag -l pthread 
+#flag -l dl 
+#flag -l rt 
+#flag -l X11
+
+#include <raylib.h>
+
+pub const version = C.RAYLIB_VERSION
 
 // "4.1-dev"
 
@@ -40,26 +51,6 @@ pub fn begin_drawing() {
 fn C.EndDrawing()
 pub fn end_drawing() {
 	C.EndDrawing()
-}
-
-fn C.BeginMode2D(camera C.Camera2D)
-pub fn begin_mode_2d(camera camera.Camera2D) {
-	C.BeginMode2D(camera)
-}
-
-fn C.EndMode2D()
-pub fn end_mode_2d() {
-	C.EndMode2D()
-}
-
-fn C.BeginMode3D(camera C.Camera3D)
-pub fn begin_mode_3d(camera camera.Camera3D) {
-	C.BeginMode3D(camera)
-}
-
-fn C.EndMode3D()
-pub fn end_mode_3d() {
-	C.EndMode3D()
 }
 
 fn C.BeginBlendMode(mode int)
@@ -123,11 +114,14 @@ pub fn get_time() f64 {
 }
 
 fn C.GetRandomValue(min int, max int) int
-pub fn random_value(min int, max int) {
+pub fn random_value(min int, max int) int {
 	return C.GetRandomValue(min, max)
 }
 
 fn C.SetRandomSeed(seed u32)
+pub fn set_randeom_seed(seed u32) {
+    C.SetRandomSeed(seed)
+}
 
 fn C.TakeScreenshot(filename &char)
 pub fn take_screenshot(filename string) {
@@ -142,3 +136,4 @@ pub fn open_url(url string) {
 		C.OpenURL(&char(url.str))
 	}
 }
+
