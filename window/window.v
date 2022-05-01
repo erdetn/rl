@@ -3,6 +3,7 @@
 module window
 
 import rl
+import rl.geometry
 
 [flag]
 pub enum ConfigFlags {
@@ -22,51 +23,53 @@ pub enum ConfigFlags {
 	interlaced_hint // C.FLAG_INTERLACED_HINT
 }
 
-pub fn (mut this ConfigFlags) parse(value int) ConfigFlags {
+pub fn (this ConfigFlags) parse(value int) ConfigFlags {
+        mut ret_this := this
+
 	if value & C.FLAG_VSYNC_HINT != 0 {
-		this |= ConfigFlags.vsync_hint
+		ret_this = ret_this | ConfigFlags.vsync_hint
 	}
 	if value & C.FLAG_FULLSCREEN_MODE != 0 {
-		this |= ConfigFlags.fullscreen_mode
+		ret_this = ret_this | ConfigFlags.fullscreen_mode
 	}
 	if value & C.FLAG_WINDOW_RESIZABLE != 0 {
-		this |= ConfigFlags.window_resizable
+		ret_this = ret_this | ConfigFlags.window_resizable
 	}
 	if value & C.FLAG_WINDOW_UNDECORATED != 0 {
-		this |= ConfigFlags.window_undecorated
+		ret_this = ret_this | ConfigFlags.window_undecorated
 	}
 	if value & C.FLAG_WINDOW_HIDDEN != 0 {
-		this |= ConfigFlags.window_hidden
+		ret_this = ret_this | ConfigFlags.window_hidden
 	}
 	if value & C.FLAG_WINDOW_MINIMIZED != 0 {
-		this |= ConfigFlags.window_minimized
+		ret_this = ret_this | ConfigFlags.window_minimized
 	}
 	if value & C.FLAG_WINDOW_MAXIMIZED != 0 {
-		this |= ConfigFlags.window_maximized
+		ret_this = ret_this | ConfigFlags.window_maximized
 	}
 	if value & C.FLAG_WINDOW_UNFOCUSED != 0 {
-		this |= ConfigFlags.window_unfocused
+		ret_this = ret_this | ConfigFlags.window_unfocused
 	}
 	if value & C.FLAG_WINDOW_TOPMOST != 0 {
-		this |= ConfigFlags.window_topmost
+		ret_this = ret_this | ConfigFlags.window_topmost
 	}
 	if value & C.FLAG_WINDOW_ALWAYS_RUN != 0 {
-		this |= ConfigFlags.window_always_run
+		ret_this = ret_this | ConfigFlags.window_always_run
 	}
 	if value & C.FLAG_WINDOW_TRANSPARENT != 0 {
-		this |= ConfigFlags.window_transparent
+		ret_this = ret_this | ConfigFlags.window_transparent
 	}
 	if value & C.FLAG_WINDOW_HIGHDPI != 0 {
-		this |= ConfigFlags.window_highdpi
+		ret_this = ret_this | ConfigFlags.window_highdpi
 	}
 	if value & C.FLAG_MSAA_4X_HINT != 0 {
-		this |= ConfigFlags.msaa_4x_hint
+		ret_this = ret_this | ConfigFlags.msaa_4x_hint
 	}
 	if value & C.FLAG_INTERLACED_HINT != 0 {
-		this |= ConfigFlags.interlaced_hint
+		ret_this = ret_this | ConfigFlags.interlaced_hint
 	}
 
-	return this
+	return ret_this
 }
 
 pub fn (this ConfigFlags) value() int {
@@ -262,7 +265,7 @@ pub fn get_screen_height() int {
 }
 
 pub fn get_screen_size() (int, int) {
-	return C.GetScreenWidth, C.GetScreenHeight()
+	return C.GetScreenWidth(), C.GetScreenHeight()
 }
 
 fn C.GetRenderWidth() int
@@ -279,14 +282,15 @@ pub fn get_render_size() (int, int) {
 	return C.GetRenderWidth(), C.GetRenderHeight()
 }
 
-fn C.GetWindowPosition() rl.Vector2
-pub fn get_position() (int, int) {
+fn C.GetWindowPosition() geometry.Vector2
+pub fn get_position() (f32, f32) {
 	wp := C.GetWindowPosition()
 	return wp.x, wp.y
 }
 
-fn C.GetWindowScaleDPI() rl.Vector2
-pub fn get_scale_dpi() (int, int) {
+fn C.GetWindowScaleDPI() geometry.Vector2
+pub fn get_scale_dpi() (f32, f32) {
 	sdpi := C.GetWindowScaleDPI()
 	return sdpi.x, sdpi.y
 }
+
