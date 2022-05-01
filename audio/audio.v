@@ -1,6 +1,6 @@
 // Copyright(C) 2022 Erdet Nasufi. All rights reserved.
 
-module audiostream
+module audio
 
 import rl
 
