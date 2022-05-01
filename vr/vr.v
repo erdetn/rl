@@ -1,8 +1,6 @@
 // Copyright(C) 2022 Erdet Nasufi. All rights reserved.
 
-module image
-
-import rl
+module vr 
 
 pub struct C.VrDeviceInfo {
 	hResolution            int
