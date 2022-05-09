@@ -100,10 +100,73 @@ fn C.DrawCubeTextureRec(texture C.Texture2D, source C.Rectangle, position C.Vect
 fn C.DrawSphere(center_pos C.Vector3, radius f32, color C.Color)
 fn C.DrawSphereEx(center_pos C.Vector3, radius f32, rings int, slices int, color C.Color)
 fn C.DrawSphereWires(center_pos C.Vector3, radius f32, rings int, slices int, color C.Color)
+
 fn C.DrawCylinder(position C.Vector3, radius_top f32, radius_bottom f32, height f32, slices int, color C.Color)
-fn C.DrawCylinderEx(start_pos C.Vector3, end_pos C.Vector3, start_radius f32, float endRadius, sides int, color C.Color)
+fn C.DrawCylinderEx(start_pos C.Vector3, end_pos C.Vector3, start_radius f32, end_radius f32, sides int, color C.Color)
+pub struct Cylinder {
+    center geometry.Vector3
+    radius_inner  f32
+    radius_outer  f32
+    height        f32
+    slices        int
+    color         color.Color
+}
+
+pub fn new_cylinder(position geometry.Vector3, ri f32, ro f32, height f32, slices int, color color.Color) Cylinder {
+    return Cylinder {
+        center: position
+        radius_inner: ri 
+        radius_outer: ro 
+        height: height 
+        slices: slices
+        color: color
+    }
+}
+pub fn (this Cylinder)draw() {
+    C.DrawCylinder(this.center, this.radius_inner, this.radius_outer, this.height, this.slices, this.color)
+}
+
 fn C.DrawCylinderWires(position C.Vector3, radius_top f32, radius_bottom f32, height f32, slices int, color C.Color)
 fn C.DrawCylinderWiresEx(start_pos C.Vector3, end_pos C.Vector3, start_radius f32, end_radius f32, sides int, color C.Color)
+
+
 fn C.DrawPlane(center_pos C.Vector3, size C.Vector2, color C.Color)
+pub struct Plane {
+    center_pos geometry.Vector3
+    size       geometry.Vector2
+    color      color.Color
+}
+pub fn new_plane(center_pos geometry.Vector3, size geometry.Vector2, color color.Color) Plane {
+    return Plane {
+        center_pos: center_pos
+        size: size
+        color: color
+    }
+}
+
+pub fn (this Plane)draw() {
+    C.DrawPlane(this.center_pos, this.size, this.color)
+}
+
 fn C.DrawRay(ray C.Ray, color C.Color)
+// TODO:
+
 fn C.DrawGrid(slices int, spacing f32)
+
+pub struct Grid {
+pub mut:
+    spacing f32
+    slices  int
+}
+
+pub fn new_grid(slices int, spacing f32) Grid {
+    return Grid {
+        spacing: spacing
+        slices: slices
+    }
+}
+
+pub fn (this Grid)draw() {
+    C.DrawGrid(this.slices, this.spacing)
+}
+
