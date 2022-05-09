@@ -4,13 +4,14 @@ module draw
 
 import rl
 import rl.color
+import rl.geometry
 
 fn C.DrawPixelV(position C.Vector2, color C.Color)
 fn C.DrawPixel(pos_x int, pos_y int, color C.Color)
 
 pub struct Pixel {
-mut:
-        x     int
+pub mut:
+	x     int
 	y     int
 	color color.Color
 }
@@ -31,6 +32,26 @@ fn C.DrawLine(start_pos_x int, start_pos_y int, end_pos_x int, end_pos_y int, co
 fn C.DrawLineV(start_pos C.Vector2, end_pos C.Vector2, color C.Color)
 fn C.DrawLineEx(start_pos C.Vector2, end_pos C.Vector2, thick f32, color C.Color)
 
+pub struct Line {
+pub mut:
+	start_point geometry.Vector2
+	stop_point  geometry.Vector2
+	thickness   f32
+	color       color.Color
+}
+
+pub fn new_line(p1 geometry.Vector2, p2 geometry.Vector2, thick f32, color color.Color) Line {
+	return Line{
+		start_point: p1
+		stop_point: p2
+		thickness: thick
+		color: color
+	}
+}
+
+pub fn (this Line) draw() {
+	C.DrawLineEx(this.start_point, this.stop_point, this.thickness, this.color)
+}
 
 fn C.DrawLineBezier(start_pos C.Vector2, end_pos C.Vector2, thick f32, color C.Color)
 fn C.DrawLineBezierQuad(start_pos C.Vector2, end_pos C.Vector2, control_pos C.Vector2, thick f32, color C.Color)
