@@ -7,6 +7,8 @@ import rl.geometry
 import rl.image
 import rl.vr
 
+#flag linux -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+
 #flag -I .
 #flag -I /usr/include
 #flag -l raylib 
