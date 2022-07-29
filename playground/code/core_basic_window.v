@@ -7,6 +7,7 @@ import rl.text
 import rl.draw
 import rl.geometry as rg
 import rl.camera as cam 
+import rl.log
 
 const screen_width  = 800
 const screen_height = 450 
@@ -16,7 +17,10 @@ fn main() {
 
     cam3d := cam.new(rg.Vector3{0, 10, 10}, rg.Vector3{0, 0, 0}, rg.Vector3{0, 1, 0}, f32(120), cam.CameraProjection.perspective)
     cam3d.set_mode(cam.CameraMode.free)
-    
+
+    log.set_level(log.TraceLogLevel.debug)
+    log.trace(.debug, 'Starting app')
+
     cylinder := draw.new_cylinder(rg.Vector3{0, 0, 0}, f32(2), f32(2), f32(2), 10, color.Color{200, 180, 0, 250})
     plane := draw.new_plane(rg.Vector3{10, 10, 0}, rg.Vector2{40, 40}, color.Color {200, 200, 200, 255})
     grid := draw.new_grid(10, f32(1))
@@ -42,7 +46,6 @@ fn main() {
         
         plane.draw()
         cylinder.draw()
-        //C.DrawCube(C.Vector3{0, 0, 0}, f32(10), f32(10), f32(10), C.Color{255, 0,0, 255})
         grid.draw()
 
         cam3d.end()
