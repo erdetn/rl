@@ -15,7 +15,9 @@ const screen_height = 450
 
 fn main() {
 	window.init(screen_width, screen_height, 'raylib [models] example - models loading')
-
+    defer {
+        window.close()
+    }
 	camera3d := camera.new(rg.Vector3{30.0, 30.0, 30.0}, 
                            rg.Vector3{0, 10.0, 0}, 
                            rg.Vector3{0, 1, 0},
@@ -28,6 +30,11 @@ fn main() {
 
 	mut model := model.new('res/castle.obj')
 	rl.set_target_fps(60)
+
+    defer {
+        model.unload()
+        window.close()
+    }
 
 	for {
 		if window.should_close() == true {
@@ -48,7 +55,4 @@ fn main() {
 		}
 		rl.end_drawing()
 	}
-
-	model.unload()
-	window.close()
 }
